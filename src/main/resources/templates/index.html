@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Watches list</title>
+</head>
+<body>
+<h1>List of watches</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Image in Base64 format</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="watchesItem : ${watches}">
+        <td><a th:href="@{~/{id}(nick=${watchesItem.id})}" th:text="${watchesItem.id}"/></td>
+        <td th:text="${watchesItem.type}"/>
+        <td th:text="${watchesItem.price}"/>
+        <td th:text="${watchesItem.description}"/>
+        <td th:text="${watchesItem.image}"/>
+    </tr>
+    </tbody>
+</table>
+</body>
