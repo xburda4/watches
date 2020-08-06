@@ -1,12 +1,15 @@
 package burda.cleevio.homework.types;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Positive;
 import java.util.Base64;
 
 @Entity
 @Getter
+@EqualsAndHashCode
 public class Watches {
 
     @Id
@@ -14,16 +17,27 @@ public class Watches {
     private long id;
 
     private String type;
+    @Positive
     private int price;
     private String description;
-    private Base64 image;
+    private String fountain;
 
     public Watches() {}
 
-    public Watches(String type, int price, String description, Base64 image) {
+    public Watches(String type, int price, String description, String fountain) {
         this.type = type;
         this.price = price;
         this.description = description;
-        this.image = image;
+        this.fountain = fountain;
+    }
+
+    public boolean isImageValid() {
+        if (fountain.length() > 255) return false;
+        try {
+            Base64.getDecoder().decode(fountain);
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
+        return true;
     }
 }
