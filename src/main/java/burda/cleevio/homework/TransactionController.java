@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 @Controller
 public class TransactionController implements ITransactionController {
@@ -28,11 +29,15 @@ public class TransactionController implements ITransactionController {
 
     @Override
     public ResponseEntity<String> showForm() {
-        return new ResponseEntity<>("index",HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<String> showWatches(Watches watches) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<String> showWatches(@PathVariable long id) {
+        Optional<Watches> optWatches = wr.findById(id);
+        if (optWatches.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(optWatches.get().toString(),HttpStatus.OK);
     }
 }

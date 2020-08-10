@@ -2,14 +2,15 @@ package burda.cleevio.homework.types;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Positive;
 import java.util.Base64;
 
 @Entity
 @Getter
 @EqualsAndHashCode
+@ToString
 public class Watches {
 
     @Id
@@ -17,7 +18,6 @@ public class Watches {
     private long id;
 
     private String type;
-    @Positive
     private int price;
     private String description;
     private String fountain;
@@ -32,6 +32,9 @@ public class Watches {
     }
 
     public boolean isImageValid() {
+        if (price <= 0) {
+            return false;
+        }
         if (fountain.length() > 255) return false;
         try {
             Base64.getDecoder().decode(fountain);
