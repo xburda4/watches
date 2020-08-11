@@ -9,3 +9,5 @@ Successful POST request will return 201 Created response and ID of the newly cre
 
 You can send GET request to http://localhost:8080/{id}, to show object saved in DB. If object with this id does not exist, you will get 404. 
 You can send GET request to http://localhost:8080/ returning 200 OK, so you can check if server is running and is accessible.
+
+You can run this project by "mvn spring-boot:run" command.
