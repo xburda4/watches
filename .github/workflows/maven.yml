@@ -40,7 +40,7 @@ jobs:
           environment: testEnvironment
           
       - name: now-deploy-preview-comment
-        uses: iam4x/now-deploy-preview-comment@v1.0.
+        uses: iam4x/now-deploy-preview-comment@v1.0.1
         
         
         
